@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
+  const tasks = [
+    { id: 1, text: "Task1", done: false },
+    { id: 2, text: "Task2", done: true },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 className="tittle">TO-DO App</h1>
+
+      <div>
+        <input type="text" placeholder="Please Enter new task..." />
+        <button>Add</button>
+      </div>
+
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <input type="checkbox" defaultChecked={task.done} />
+            {task.text}
+            {task.done}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
