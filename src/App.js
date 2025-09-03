@@ -22,20 +22,38 @@ function App() {
     setNewTask("");
   };
 
+  const checkUncheck = (id) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, done: !task.done } : task
+    );
+    setTasks(updatedTasks);
+  };
+
   return (
     <div>
       <h1 className="tittle">TO-DO App</h1>
 
       <div>
-        <input type="text" placeholder="Please Enter new task..." value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
+        <input
+          type="text"
+          placeholder="Please Enter new task..."
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
         <button onClick={addTask}>Add</button>
       </div>
 
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <input type="checkbox" defaultChecked={task.done} />
-            {task.text}
+            <input
+              type="checkbox"
+              checked={task.done}
+              onChange={() => checkUncheck(task.id)}
+            />
+            <span style={{ textDecoration: task.done ? "line-through" : "none" }}>
+              {task.text}
+            </span>
           </li>
         ))}
       </ul>
