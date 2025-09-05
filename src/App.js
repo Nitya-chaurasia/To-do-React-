@@ -29,6 +29,12 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const [fltr, setFltr] = useState("all");
+  const fltrdtasks = tasks.filter((task) => {
+    if (fltr === "active") return !task.done;
+    if (fltr === "completed") return task.done;
+    return true;
+  });
   return (
     <div>
       <h1 className="tittle">TO-DO App</h1>
@@ -39,24 +45,34 @@ function App() {
           placeholder="Please Enter new task..."
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              addTask();}
+          }}
         />
         <button onClick={addTask}>Add</button>
       </div>
 
       <ul>
-        {tasks.map((task) => (
+        {fltrdtasks.map((task) => (
           <li key={task.id}>
             <input
               type="checkbox"
               checked={task.done}
               onChange={() => checkUncheck(task.id)}
             />
-            <span style={{ textDecoration: task.done ? "line-through" : "none" }}>
+            <span
+              style={{ textDecoration: task.done ? "line-through" : "none" }}>
               {task.text}
             </span>
           </li>
         ))}
       </ul>
+      <div>
+        <button onClick={()=>setFltr("all")}>All</button>
+        <button onClick={()=>setFltr("active")}>Active</button>
+        <button onClick={()=>setFltr("completed")}>Completed</button>
+      </div>
     </div>
   );
 }
