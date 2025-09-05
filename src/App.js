@@ -35,6 +35,14 @@ function App() {
     if (fltr === "completed") return task.done;
     return true;
   });
+
+    const deleteTask = (id) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  };
+
+
+
   return (
     <div>
       <h1 className="tittle">TO-DO App</h1>
@@ -65,6 +73,9 @@ function App() {
               style={{ textDecoration: task.done ? "line-through" : "none" }}>
               {task.text}
             </span>
+             <button onClick={() => deleteTask(task.id)}>Delete</button>
+
+
           </li>
         ))}
       </ul>
