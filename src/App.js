@@ -44,11 +44,12 @@ function App() {
 
 
   return (
-    <div>
+    <div className="app-container">
       <h1 className="tittle">TO-DO App</h1>
 
-      <div>
+      <div className="task-input">
         <input
+          className="t-input"
           type="text"
           placeholder="Please Enter new task..."
           value={newTask}
@@ -57,13 +58,14 @@ function App() {
             if (e.key === "Enter") {
               addTask();}
           }}
+          
         />
-        <button onClick={addTask}>Add</button>
+        <button className="btn" onClick={addTask}>Add</button>
       </div>
 
-      <ul>
+      <ul className="ul-list">
         {fltrdtasks.map((task) => (
-          <li key={task.id}>
+          <li className="li-task" key={task.id}>
             <input
               type="checkbox"
               checked={task.done}
@@ -73,16 +75,16 @@ function App() {
               style={{ textDecoration: task.done ? "line-through" : "none" }}>
               {task.text}
             </span>
-             <button onClick={() => deleteTask(task.id)}>Delete</button>
+             <button className="del-btn" onClick={() => deleteTask(task.id)}>Delete</button>
 
 
           </li>
         ))}
       </ul>
-      <div>
-        <button onClick={()=>setFltr("all")}>All</button>
-        <button onClick={()=>setFltr("active")}>Active</button>
-        <button onClick={()=>setFltr("completed")}>Completed</button>
+      <div className="fltr-btns">
+        <button className="fltr-btn" onClick={()=>setFltr("all")}>All</button>
+        <button className="fltr-btn" onClick={()=>setFltr("active")}>Active</button>
+        <button className="fltr-btn" onClick={()=>setFltr("completed")}>Completed</button>
       </div>
     </div>
   );
