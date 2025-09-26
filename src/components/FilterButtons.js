@@ -1,6 +1,8 @@
-import React from "react";
+import { useContext } from "react";
+import { TodoContext } from "../context/TodoContext";
 
-function FilterButtons({ setFltr }) {
+function FilterButtons() {
+  const { setFltr } = useContext(TodoContext);
   return (
     <div className="fltr-btns">
       <button className="fltr-btn" onClick={() => setFltr("all")}>
