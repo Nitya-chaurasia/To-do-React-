@@ -1,6 +1,8 @@
-import React from "react";
+import { useContext } from "react";
+import { TodoContext } from "../context/TodoContext";
 
-function TodoInput({ newTask, setNewTask, addTask }) {
+function TodoInput() {
+  const { newTask, setNewTask, addTask } = useContext(TodoContext);
   return (
     <div className="task-input">
       <input

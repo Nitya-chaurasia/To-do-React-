@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import TodoItem from "./TodoItem";
+import { TodoContext } from "../context/TodoContext";
 
-function TodoList({ fltrdtasks, checkUncheck, deleteTask }) {
+function TodoList() {
+  const { fltrdtasks, checkUncheck, deleteTask } = useContext(TodoContext);
   return (
     <ul className="ul-list">
       {fltrdtasks.map((task) => (

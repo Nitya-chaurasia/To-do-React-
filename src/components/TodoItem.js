@@ -1,6 +1,8 @@
-import React from "react";
+import { useContext } from "react";
+import { TodoContext } from "../context/TodoContext";
 
-function TodoItem({ task, checkUncheck, deleteTask }) {
+function TodoItem({ task }) {
+  const { checkUncheck, deleteTask } = useContext(TodoContext);
   return (
     <li className="li-task">
       <input

@@ -3,6 +3,7 @@ import { useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 import FilterButtons from "./components/FilterButtons";
+import { TodoContext } from "./context/TodoContext";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -41,12 +42,26 @@ function App() {
   };
 
   return (
+     <TodoContext.Provider
+      value={{
+        tasks,
+        newTask,
+        fltr,
+        setFltr,
+        setNewTask,
+        addTask,
+        checkUncheck,
+        deleteTask,
+        fltrdtasks,
+      }}
+    >
     <div className="app-container">
       <h1 className="tittle">TO-DO App</h1>
-      <TodoInput newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
-      <TodoList fltrdtasks={fltrdtasks} checkUncheck={checkUncheck} deleteTask={deleteTask} />
-      <FilterButtons setFltr={setFltr} />
+        <TodoInput />
+        <TodoList />
+        <FilterButtons />
     </div>
+    </TodoContext.Provider>
   );
 }
 
