@@ -1,51 +1,43 @@
 import "./App.css";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 import FilterButtons from "./components/FilterButtons";
+import { addTodo, toggleTodo, deleteTodo, setFilter } from "./redux/todoSlice";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: "Task1", done: false },
-    { id: 2, text: "Task2", done: true },
-  ]);
-  const [newTask, setNewTask] = useState("");
-  const addTask = () => {
-    if (newTask.trim() === "") return;
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.todos.items);
+  const fltr = useSelector((state) => state.todos.filter);
 
-    const newTodo = {
-      id: Date.now(),
-      text: newTask,
-      done: false,
-    };
-
-    setTasks([...tasks, newTodo]);
-    setNewTask("");
-  };
-  const checkUncheck = (id) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, done: !task.done } : task
-    );
-    setTasks(updatedTasks);
-  };
-  const [fltr, setFltr] = useState("all");
   const fltrdtasks = tasks.filter((task) => {
     if (fltr === "active") return !task.done;
     if (fltr === "completed") return task.done;
     return true;
   });
 
-    const deleteTask = (id) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
+  const addTask = (text) => {
+    if (text.trim() !== "") dispatch(addTodo(text));
+  };
+
+  const checkUncheck = (id) => {
+    dispatch(toggleTodo(id));
+  };
+
+  const deleteTask = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
+  const setFltrHandler = (filter) => {
+    dispatch(setFilter(filter));
   };
 
   return (
     <div className="app-container">
       <h1 className="tittle">TO-DO App</h1>
-      <TodoInput newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
+      <TodoInput newTask="" setNewTask={(t) => {}} addTask={(text) => addTask(text)} />
       <TodoList fltrdtasks={fltrdtasks} checkUncheck={checkUncheck} deleteTask={deleteTask} />
-      <FilterButtons setFltr={setFltr} />
+      <FilterButtons setFltr={setFltrHandler} />
     </div>
   );
 }

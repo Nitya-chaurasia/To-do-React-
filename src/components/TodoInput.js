@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
-function TodoInput({ newTask, setNewTask, addTask }) {
+function TodoInput({ addTask }) {
+  const [newTask, setNewTask] = useState("");
+
+  const handleAdd = () => {
+    addTask(newTask);
+    setNewTask("");
+  };
+
   return (
     <div className="task-input">
       <input
@@ -9,13 +16,9 @@ function TodoInput({ newTask, setNewTask, addTask }) {
         placeholder="Please Enter new task..."
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") addTask();
-        }}
+        onKeyDown={(e) => { if (e.key === "Enter") handleAdd(); }}
       />
-      <button className="btn" onClick={addTask}>
-        Add
-      </button>
+      <button className="btn" onClick={handleAdd}>Add</button>
     </div>
   );
 }
