@@ -1,6 +1,10 @@
 import React from "react";
 
-function FilterButtons({ setFltr }) {
+type FilterButtonsProps = {
+  setFltr: React.Dispatch<React.SetStateAction<"all" | "active" | "completed">>;
+};
+
+function FilterButtons({ setFltr }: FilterButtonsProps) {
   return (
     <div className="fltr-btns">
       <button className="fltr-btn" onClick={() => setFltr("all")}>

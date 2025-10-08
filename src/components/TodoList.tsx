@@ -1,7 +1,14 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import type { TaskType } from "../App";
 
-function TodoList({ fltrdtasks, checkUncheck, deleteTask }) {
+type TodoListProps = {
+  fltrdtasks: TaskType[];
+  checkUncheck: (id: number) => void;
+  deleteTask: (id: number) => void;
+};
+
+function TodoList({ fltrdtasks, checkUncheck, deleteTask }:TodoListProps) {
   return (
     <ul className="ul-list">
       {fltrdtasks.map((task) => (

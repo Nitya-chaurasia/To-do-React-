@@ -1,6 +1,13 @@
 import React from "react";
+import type { TaskType } from "../App";
 
-function TodoItem({ task, checkUncheck, deleteTask }) {
+type TodoItemProps = {
+  task: TaskType;
+  checkUncheck: (id: number) => void;
+  deleteTask: (id: number) => void;
+};
+
+function TodoItem({ task, checkUncheck, deleteTask }: TodoItemProps) {
   return (
     <li className="li-task">
       <input
